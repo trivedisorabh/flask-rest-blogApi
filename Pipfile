@@ -10,6 +10,7 @@ flask = "*"
 flask-sqlalchemy = "*"
 psycopg2 = "*"
 pyjwt = "*"
+sqlalchemy-media = "*"
 
 [requires]
 python_version = "3.6"

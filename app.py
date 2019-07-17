@@ -3,7 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import create_engine
 from werkzeug.security import generate_password_hash, check_password_hash
 from sqlalchemy.orm import sessionmaker
-from models import Base, User
+from models import Base, User, Category, Blogpost
 import jwt
 import datetime
 from functools import wraps
@@ -22,9 +22,10 @@ Base.metadata.bind = engine
 DBSession = sessionmaker(bind=engine)
 session = DBSession()
 
+
 @app.route('/')
 def index():
-    return "<h1> Velkommen til dette apiet</h1>"
+    return "<h1> welcome to this RESTfull API</h1>"
 
 # making the decorator..
 def token_required(f):
@@ -144,3 +145,37 @@ def login():
         return jsonify({"token" : token.decode('UTF-8')})
 
     return make_response('Could not verify', 401, {'WWW-Authenticate' : 'Basic realm="Login required!"'})
+
+"""
+Endpoint that concerns blogposts, categorys and comments
+"""
+
+@app.route('/category', methods=['POST'])
+def create_category():
+    blogpost = session.query(Blogpost).get(1)
+    data = request.get_json(force=True)
+    new_category = Category(name = data['name'], blogpost = blogpost)
+    session.add(new_category)
+    session.commit()
+
+    return jsonify({"message" : "category is created..."})
+
+
+@app.route('/blogpost_test', methods=['POST'])
+def blogpost_test():
+
+    data = request.get_json(force=True)
+    new_blogpost = Blogpost(name = data['name'], content = data['content'], author_id = data['author_id'])
+    session.add(new_blogpost)
+    session.commit()
+    return jsonify({"message" : "post created"})
+
+"""
+Test route.. 
+"""
+@app.route('/test_relation', methods=['GET'])
+def test():
+    author = session.query(Blogpost).filter_by(author_id=2).first()
+    category = session.query(Category).filter_by(name='testpost').first()
+    print(author.category[0].name)
+    return jsonify({"message" : "testing..."})
