@@ -171,11 +171,10 @@ def blogpost_test():
     return jsonify({"message" : "post created"})
 
 """
-Test route.. 
+Test route..
 """
 @app.route('/test_relation', methods=['GET'])
 def test():
     author = session.query(Blogpost).filter_by(author_id=2).first()
     category = session.query(Category).filter_by(name='testpost').first()
-    print(author.category[0].name)
     return jsonify({"message" : "testing..."})

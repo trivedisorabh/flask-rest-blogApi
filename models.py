@@ -25,7 +25,7 @@ class Blogpost(Base):
     name = Column(String(120), nullable=False)
     content = Column(Text, nullable=False)
     author_id = Column(Integer, ForeignKey('users.id'), nullable=False)
-    created_at = Column(DateTime)
+    created_at = Column(DateTime, default=datetime.datetime.utcnow())
     modified_at = Column(DateTime)
     category = relationship('Category', backref='blogpost')
 
