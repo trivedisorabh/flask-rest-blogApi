@@ -32,4 +32,12 @@ $ cd toTheProject
 $ pipenv --python 3.6
 $ pipenv install requests```
 
-Now your project should be oki to run.
+
+Now your project should be oki to run.<br>
+Documentation on the endpoints are under construction.
+
+Run the application with
+
+```
+$ flask run
+```
