@@ -161,14 +161,51 @@ def create_category():
     return jsonify({"message" : "category is created..."})
 
 
-@app.route('/blogpost_test', methods=['POST'])
-def blogpost_test():
+@app.route('/blogpost', methods=['POST'])
+def create_blogpost():
 
     data = request.get_json(force=True)
     new_blogpost = Blogpost(name = data['name'], content = data['content'], author_id = data['author_id'])
     session.add(new_blogpost)
     session.commit()
     return jsonify({"message" : "post created"})
+
+@app.route('/blogpost', methods=['GET'])
+def get_all():
+
+    blogposts = session.query(Blogpost).all()
+
+
+    blogpost_output = []
+
+    for post in blogposts:
+        data = {}
+        data['id'] = post.id
+        data['name'] = post.name
+        data['content'] = post.content
+        data['author_id'] = post.author_id
+        data['created_at'] = post.created_at
+        data['modified_at'] = post.modified_at
+        blogpost_output.append(data)
+
+    return jsonify({"blogposts" : blogpost_output})
+
+# how to implement that only one or the other Columne get updatet
+# Does one need sevral routes?
+@app.route('/blogpost/<blogpost_id>', methods=['PUT'])
+def update_blogpost(blogpost_id):
+    blogpost = session.query(Blogpost).get(blogpost_id)
+    print(blogpost)
+    name = request.get_json(['name'])
+    content = request.get_json(['content'])
+
+    blogpost.name = name['name']
+    blogpost.content = content['content']
+
+    session.add(blogpost)
+    session.commit()
+    return jsonify({"message" : "Blogpost has been updated..."})
+
 
 """
 Test route..

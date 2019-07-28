@@ -26,17 +26,21 @@ class Blogpost(Base):
     content = Column(Text, nullable=False)
     author_id = Column(Integer, ForeignKey('users.id'), nullable=False)
     created_at = Column(DateTime, default=datetime.datetime.utcnow())
-    modified_at = Column(DateTime)
+    modified_at = Column(DateTime, default=datetime.datetime.utcnow())
     category = relationship('Category', backref='blogpost')
+    comment = relationship('Comment', backref='blogpost')
 
 
 class Category(Base):
     __tablename__ = "category"
     id = Column(Integer, primary_key=True)
-    name = Column(String(50))
+    name = Column(String(50), nullable=False)
     blogpost_id = Column(Integer, ForeignKey('blogpost.id'))
 
 
-# class Comment(Base):
-#     __tablename__ = "comments"
-#     id = Column(Integer, primary_key=True)
+class Comment(Base):
+    __tablename__ = "comments"
+    id = Column(Integer, primary_key=True)
+    email = Column(String(50), nullable=False)
+    blogpost_id = Column(Integer, ForeignKey('blogpost.id'))
+    created_at = Column(DateTime, default=datetime.datetime.utcnow())
