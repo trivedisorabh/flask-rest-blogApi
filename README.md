@@ -26,11 +26,12 @@ __Built with:__
 __Install:__
 
 Clone the repo and setup with pipenv<br>
-```command
+```
 $ brew install pipenv
 $ cd toTheProject
 $ pipenv --python 3.6
-$ pipenv install requests```
+$ pipenv install requests
+```
 
 
 Now your project should be oki to run.<br>
