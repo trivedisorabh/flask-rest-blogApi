@@ -22,3 +22,14 @@ __Built with:__
 - [JWT](https://github.com/jpadilla/pyjwt)
 - [pipenv](https://pipenv.readthedocs.io/en/latest/)
 -[sqlalchemy-media](https://pypi.org/project/sqlalchemy-media/)
+
+__Install:__
+
+Clone the repo and setup with pipenv<br>
+```command
+$ brew install pipenv
+$ cd toTheProject
+$ pipenv --python 3.6
+$ pipenv install requests```
+
+Now your project should be oki to run.
