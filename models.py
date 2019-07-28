@@ -38,9 +38,11 @@ class Category(Base):
     blogpost_id = Column(Integer, ForeignKey('blogpost.id'))
 
 
+# just temporary... need to make this spam safe.
 class Comment(Base):
     __tablename__ = "comments"
     id = Column(Integer, primary_key=True)
     email = Column(String(50), nullable=False)
+    content = Column(String(200), nullable=False)
     blogpost_id = Column(Integer, ForeignKey('blogpost.id'))
     created_at = Column(DateTime, default=datetime.datetime.utcnow())

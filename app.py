@@ -3,7 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import create_engine
 from werkzeug.security import generate_password_hash, check_password_hash
 from sqlalchemy.orm import sessionmaker
-from models import Base, User, Category, Blogpost
+from models import Base, User, Category, Blogpost, Comment
 import jwt
 import datetime
 from functools import wraps
@@ -147,19 +147,8 @@ def login():
     return make_response('Could not verify', 401, {'WWW-Authenticate' : 'Basic realm="Login required!"'})
 
 """
-Endpoint that concerns blogposts, categorys and comments
+Endpoint that concerns blogposts
 """
-
-@app.route('/category', methods=['POST'])
-def create_category():
-    blogpost = session.query(Blogpost).get(1)
-    data = request.get_json(force=True)
-    new_category = Category(name = data['name'], blogpost = blogpost)
-    session.add(new_category)
-    session.commit()
-
-    return jsonify({"message" : "category is created..."})
-
 
 @app.route('/blogpost', methods=['POST'])
 def create_blogpost():
@@ -174,7 +163,6 @@ def create_blogpost():
 def get_all():
 
     blogposts = session.query(Blogpost).all()
-
 
     blogpost_output = []
 
@@ -199,12 +187,81 @@ def update_blogpost(blogpost_id):
     name = request.get_json(['name'])
     content = request.get_json(['content'])
 
-    blogpost.name = name['name']
     blogpost.content = content['content']
+    blogpost.name = name['name']
 
+    blogpost.modified_at = datetime.datetime.utcnow()
     session.add(blogpost)
     session.commit()
     return jsonify({"message" : "Blogpost has been updated..."})
+
+@app.route('/blogpost/<blogpost_id>', methods=['DELETE'])
+def delete_blogpost(blogpost_id):
+    blogpost = session.query(Blogpost).get(blogpost_id)
+    if not blogpost:
+        return jsonify({"message:" : "The user does not exist"})
+
+    session.delete(blogpost)
+    session.commit()
+    return jsonify({"message" : "The blogpost is deleted..."})
+
+"""
+Endpoints that conserns comments
+"""
+
+@app.route('/comment', methods=['POST'])
+def create_comment():
+    data = request.get_json(force=True)
+    new_comment = Comment(email = data['email'], content = data['content'], blogpost_id = data['blogpost_id'])
+    session.add(new_comment)
+    session.commit()
+    return jsonify({"message" : "comment created"})
+
+@app.route('/comment', methods=['GET'])
+def get_comments():
+    comments = session.query(Comment).all()
+
+    comment_output = []
+
+    for comment in comments:
+        data = {}
+        data['id'] = comment.id
+        data['email'] = comment.email
+        data['content'] = comment.content
+        data['blogpost_id'] = comment.blogpost_id
+        data['created_at'] = comment.created_at
+        comment_output.append(data)
+
+    return jsonify({"Comments" : comment_output})
+
+"""
+Endpoints that concerns categorys
+"""
+
+@app.route('/category', methods=['POST'])
+def create_category():
+    blogpost = session.query(Blogpost).get(1)
+    data = request.get_json(force=True)
+    new_category = Category(name = data['name'], blogpost = blogpost)
+    session.add(new_category)
+    session.commit()
+
+    return jsonify({"message" : "category is created..."})
+
+@app.route('/category', methods=['GET'])
+def get_categorys():
+    categorys = session.query(Category).all()
+
+    category_output = []
+
+    for category in categorys:
+        data = {}
+        data['id'] = category.id
+        data['name'] = category.name
+        data['blogpost_id'] = category.blogpost_id
+        category_output.append(data)
+
+    return jsonify({"Categorys" : category_output})
 
 
 """
