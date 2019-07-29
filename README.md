@@ -33,6 +33,14 @@ $ pipenv --python 3.6
 $ pipenv install requests
 ```
 
+Change configuration variables in config.py according to your work environment<br>
+```
+SQLALCHEMY_DATABASE_URI = 'postgresql://robert:moss@localhost/blog_api_db'
+SECRET_KEY = 'thisissecret'
+DATABASE_URI = 'postgresql://robert:moss@localhost/blog_api_db'
+
+```
+
 
 Now your project should be oki to run.<br>
 Documentation on the endpoints are under construction.
