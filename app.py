@@ -9,14 +9,14 @@ import datetime
 from functools import wraps
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://robert:moss@localhost/blog_api_db'
-app.config['SECRET_KEY'] = 'thisissecret'
-DATABASE_URI = 'postgresql://robert:moss@localhost/blog_api_db'
+#loading configuration variables from file
+app.config.from_object('config')
+
 db = SQLAlchemy(app)
 
-# read docs for this approach...
-# is it a better way to structure config?
-engine = create_engine(DATABASE_URI)
+#using db uri from app config
+engine = create_engine(app.config['DATABASE_URI'])
+
 Base.metadata.create_all(engine)
 Base.metadata.bind = engine
 DBSession = sessionmaker(bind=engine)
