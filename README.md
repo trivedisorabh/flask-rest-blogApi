@@ -37,8 +37,7 @@ Change configuration variables in config.py according to your work environment<b
 ```
 SQLALCHEMY_DATABASE_URI = 'postgresql://robert:moss@localhost/blog_api_db'
 SECRET_KEY = 'thisissecret'
-DATABASE_URI = 'postgresql://robert:moss@localhost/blog_api_db'
-
+DATABASE_URI = 'your choice of SQLdb' # this app is setup with postgresql
 ```
 
 
