@@ -12,7 +12,6 @@ app = Flask(__name__)
 #loading configuration variables from file
 app.config.from_object('config')
 
-db = SQLAlchemy(app)
 
 #using db uri from app config
 engine = create_engine(app.config['DATABASE_URI'])
