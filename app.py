@@ -10,11 +10,10 @@ from functools import wraps
 
 app = Flask(__name__)
 #loading configuration variables from file
-app.config.from_object('config')
-
+app.config.from_object('config.Config')
 
 #using db uri from app config
-engine = create_engine(app.config['DATABASE_URI'])
+engine = create_engine(app.config['SQLALCHEMY_DATABASE_URI'])
 
 Base.metadata.create_all(engine)
 Base.metadata.bind = engine
