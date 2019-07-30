@@ -35,8 +35,8 @@ $ pipenv install requests
 
 Change configuration variables in config.py according to your work environment<br>
 ```
-SQLALCHEMY_DATABASE_URI = 'postgresql://robert:moss@localhost/blog_api_db'
-SECRET_KEY = 'thisissecret'
+SQLALCHEMY_DATABASE_URI = 'your choice of SQLdb'
+SECRET_KEY = 'thisissecret' 
 DATABASE_URI = 'your choice of SQLdb' # this app is setup with postgresql
 ```
 
