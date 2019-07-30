@@ -34,12 +34,17 @@ $ pipenv install requests
 ```
 
 Change configuration variables in config.py according to your work environment<br>
+You set your variables from the command line like this:
 ```
-SQLALCHEMY_DATABASE_URI = 'your choice of SQLdb'
-SECRET_KEY = 'thisissecret' 
-DATABASE_URI = 'your choice of SQLdb' # this app is setup with postgresql
+$ export DATABASE_URI= 'read the docs on your choice of DB'
+$ export SECRET_KEY = 'thisissecret'
 ```
-
+The config file is handling the environment variables like this:
+```python
+class Config(object):
+  SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URI')
+  SECRET_KEY = os.getenv('SECRET_KEY')
+```
 
 Now your project should be oki to run.<br>
 Documentation on the endpoints are under construction.
