@@ -232,13 +232,29 @@ def get_comments():
 
     return jsonify({"Comments" : comment_output})
 
+@app.route('/comment/<comment_id>', methods=['DELETE'])
+def delete_comment(comment_id):
+
+    comment = session.query(Comment).get(comment_id)
+    if not comment:
+        return jsonify({"message:" : "The comment does not exist" })
+
+    session.delete(comment)
+    session.commit()
+    return jsonify({"message" : "The category is deleted..."})
+
+
 """
 Endpoints that concerns categorys
 """
 
-@app.route('/category', methods=['POST'])
-def create_category():
-    blogpost = session.query(Blogpost).get(1)
+@app.route('/category/<blogpost_id>', methods=['POST'])
+def create_category(blogpost_id):
+    # need to be general, now its just making for id 1
+    blogpost = session.query(Blogpost).get(blogpost_id)
+    if not blogpost:
+        return jsonify({"message:" : "The blogpost does not exist" }), 404
+
     data = request.get_json(force=True)
     new_category = Category(name = data['name'], blogpost = blogpost)
     session.add(new_category)
@@ -261,6 +277,16 @@ def get_categorys():
 
     return jsonify({"Categorys" : category_output})
 
+@app.route('/category/<category_id>', methods=['DELETE'])
+def delete_category(category_id):
+
+    category = session.query(Category).get(category_id)
+    if not category:
+        return jsonify({"message:" : "The category does not exist" })
+
+    session.delete(category)
+    session.commit()
+    return jsonify({"message" : "The category is deleted..."})
 
 """
 Test route..
