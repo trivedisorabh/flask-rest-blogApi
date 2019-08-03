@@ -176,6 +176,26 @@ def get_all():
 
     return jsonify({"blogposts" : blogpost_output})
 
+@app.route('/blogpost/<blogpost_id>', methods=['GET'])
+def get_one_post(blogpost_id):
+
+    blogpost = session.query(Blogpost).get(blogpost_id)
+
+    if not blogpost:
+        return jsonify({"message:" : "The blogpost does not exist" }), 404
+
+    blog_data = {}
+    blog_data['id'] = blogpost.id
+    blog_data['name'] = blogpost.name
+    blog_data['content'] = blogpost.content
+    blog_data['author_id'] = blogpost.author_id
+    blog_data['created_at'] = blogpost.created_at
+    blog_data['modified_at'] = blogpost.modified_at
+
+    return jsonify({"blogpost" : blog_data})
+
+
+
 # how to implement that only one or the other Columne get updatet
 # Does one need sevral routes?
 @app.route('/blogpost/<blogpost_id>', methods=['PUT'])
