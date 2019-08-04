@@ -15,6 +15,7 @@ class User(Base):
     email = Column(String(80), unique=True, nullable=False)
     password = Column(String(80))
     admin = Column(Boolean)
+    test = Column(String(50))
 
 # The blogpost model is simple, but contains ForeignKey for relations to users
 # Should also contain a relation to comment feature...
