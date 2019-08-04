@@ -7,6 +7,7 @@ from models import Base, User, Category, Blogpost, Comment
 import jwt
 import datetime
 from functools import wraps
+from flask_migrate import Migrate
 
 app = Flask(__name__)
 #loading configuration variables from file
@@ -20,6 +21,8 @@ Base.metadata.bind = engine
 DBSession = sessionmaker(bind=engine)
 session = DBSession()
 
+# using flask_migrate to update/downgrade db.
+migrate = Migrate(app, Base) 
 
 @app.route('/')
 def index():

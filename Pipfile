@@ -11,6 +11,7 @@ flask-sqlalchemy = "*"
 psycopg2 = "*"
 pyjwt = "*"
 sqlalchemy-media = "*"
+flask-migrate = "*"
 
 [requires]
 python_version = "3.6"

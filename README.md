@@ -20,7 +20,8 @@ __Built with:__
 - [SQLAlchemy](https://github.com/pallets/flask-sqlalchemy)
 - [JWT](https://github.com/jpadilla/pyjwt)
 - [pipenv](https://pipenv.readthedocs.io/en/latest/)
--[sqlalchemy-media](https://pypi.org/project/sqlalchemy-media/)
+- [sqlalchemy-media](https://pypi.org/project/sqlalchemy-media/)
+- [Flask-Migrate](https://flask-migrate.readthedocs.io/en/latest/)
 
 __Install:__
 
