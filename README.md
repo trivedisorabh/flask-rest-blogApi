@@ -9,7 +9,7 @@ The project is not finished, so please let me know if you see somthing you like 
 __Todos:__<br>
  - review structure of the project
  - Update readme
- - Look at pest practice to do DB migrations
+ - Look at best practice to do DB migrations
  - Add a logout route.
 
 ## How to run the API
@@ -34,7 +34,7 @@ $ pipenv install requests
 ```
 
 Change configuration variables in config.py according to your work environment<br>
-You set your variables from the command line like this:
+You set your variables from the command line like this(for OSX):
 ```
 $ export DATABASE_URI= 'read the docs on your choice of DB'
 $ export SECRET_KEY = 'thisissecret'
@@ -54,3 +54,5 @@ Run the application with
 ```
 $ flask run
 ```
+
+__API Documentation:__
