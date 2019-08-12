@@ -148,6 +148,22 @@ def login():
     return make_response('Could not verify', 401, {'WWW-Authenticate' : 'Basic realm="Login required!"'})
 
 """
+Implementing a logout rout, not finished.
+"""
+@app.route('/logout', methods=['POST'])
+@token_required
+def logout():
+    auth_header = request.headers.get('Authorization')
+    if auth_header:
+        auth_token = auth_header.split(" ")[1]
+        print(auth_token)
+        return jsonify({"message" : "found it.."})
+    else:
+        auth_token = ''
+        return jsonify({"message": "ups.."})
+
+
+"""
 Endpoint that concerns blogposts
 """
 
@@ -310,18 +326,6 @@ def delete_category(category_id):
     session.delete(category)
     session.commit()
     return jsonify({"message" : "The category is deleted..."})
-
-"""
-Implementing a logout rout, not finished.
-"""
-@app.route('/logout', methods=['POST'])
-def logout():
-    auth_header = request.headers.get('Authorization')
-    if auth_header:
-        return jsonify({"message" : "found it.."})
-        print(auth_header)
-    else:
-        return jsonify({"message": "ups.."})
 
 
 """
