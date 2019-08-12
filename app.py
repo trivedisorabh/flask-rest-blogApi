@@ -312,6 +312,19 @@ def delete_category(category_id):
     return jsonify({"message" : "The category is deleted..."})
 
 """
+Implementing a logout rout, not finished.
+"""
+@app.route('/logout', methods=['POST'])
+def logout():
+    auth_header = request.headers.get('Authorization')
+    if auth_header:
+        return jsonify({"message" : "found it.."})
+        print(auth_header)
+    else:
+        return jsonify({"message": "ups.."})
+
+
+"""
 Test route..
 """
 @app.route('/test_relation', methods=['GET'])
