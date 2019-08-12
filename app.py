@@ -22,11 +22,11 @@ DBSession = sessionmaker(bind=engine)
 session = DBSession()
 
 # using flask_migrate to update/downgrade db.
-migrate = Migrate(app, Base) 
+migrate = Migrate(app, Base)
 
 @app.route('/')
 def index():
-    return "<h1> welcome to this RESTfull API</h1>"
+    return jsonify({"message" : "see github for docs"})
 
 # making the decorator..
 def token_required(f):

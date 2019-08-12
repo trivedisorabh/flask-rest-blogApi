@@ -1,4 +1,4 @@
-# Simple flask restfull blog-Api
+# Simple RESTfull Blog-API
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 

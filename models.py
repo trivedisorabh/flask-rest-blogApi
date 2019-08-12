@@ -47,3 +47,11 @@ class Comment(Base):
     content = Column(String(200), nullable=False)
     blogpost_id = Column(Integer, ForeignKey('blogpost.id'))
     created_at = Column(DateTime, default=datetime.datetime.utcnow())
+
+
+# table for handling blacklisted tokens.
+class BlacklistToken(Base):
+    __tablename__ = "blacklist_tokens"
+    id = Column(Integer, primary_key=True)
+    token = Column(String(500), unique=True, nullable=False)
+    blacklisted_on = Column(DateTime, default=datetime.datetime.now())
