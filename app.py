@@ -8,10 +8,14 @@ import jwt
 import datetime
 from functools import wraps
 from flask_migrate import Migrate
+from flask_cors import CORS
 
 app = Flask(__name__)
 #loading configuration variables from file
 app.config.from_object('config.Config')
+
+#using cors
+cors = CORS(app)
 
 #using db uri from app config
 engine = create_engine(app.config['SQLALCHEMY_DATABASE_URI'])
@@ -150,17 +154,27 @@ def login():
 """
 Implementing a logout rout, not finished.
 """
-@app.route('/logout', methods=['POST'])
+@app.route('/logout/<user_id>', methods=['POST'])
 @token_required
-def logout():
+def logout(user_id):
+
+    user = session.query(User).get(user_id)
+
+
     auth_header = request.headers.get('Authorization')
+    print(auth_header)
     if auth_header:
         auth_token = auth_header.split(" ")[1]
-        print(auth_token)
-        return jsonify({"message" : "found it.."})
+        try:
+            blacklist_token = BlacklistToken(token=auth_token)
+            session.add(blacklist_token)
+            session.commit()
+            return jsonify({"message" : "you are logged out.."})
+        except Exception as e:
+            return jsonify({"message" : "failed to log out.."})
     else:
-        auth_token = ''
         return jsonify({"message": "ups.."})
+
 
 
 """
