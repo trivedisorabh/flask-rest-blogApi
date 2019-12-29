@@ -4,6 +4,11 @@
   </div>
 </template>
 
+<style>
+  #app {
+    margin-top: 40px;
+  }
+</style>
 
 <!-- <template>
   <div id="app">
