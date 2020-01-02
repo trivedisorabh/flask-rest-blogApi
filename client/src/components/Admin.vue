@@ -1,15 +1,19 @@
 <template>
-<body>
-  <div class="bg-light border-right" id="sidebar-wrapper">
-    <div class="sidebar-heading">
-      RMK Blog
-    </div>
-    <div class="list-group list-group-flush">
-      <a href="#" class="list-group-item bg-light">Home</a>
-    </div>
-
+  <div id="sidenav">
+    <aside id="sidebar-wrapper">
+      <div class="sidebar-brand">
+        <h2>Admin</h2>
+      </div>
+      <ul class="sidebar-nav">
+        <li class="active">
+          <a href="#"><i class="fa fa-home"></i>Hjem</a>
+        </li>
+        <li>
+          <a href="#"><i class="fas fa-blog">Poster</i></a>
+        </li>
+      </ul>
+    </aside>
   </div>
-</body>
 </template>
 
 
@@ -19,5 +23,52 @@
 </script>
 
 <style>
+
+#sidenav {
+  padding-left: 0;
+  transition: all 0.5s;
+  position: relative;
+}
+
+#sidebar-wrapper{
+  background: #222;
+  position: fixed;
+  height: 100%;
+  width: 250px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  z-index: 1000;
+}
+
+.sidebar-brand {
+  position: absolute;
+  width: 250px;
+  text-align: center;
+  padding: 20px 0;
+}
+
+.sidebar-brand h2 {
+  margin: 0;
+  font-weight: 600;
+  font-size: 24px;
+  color: #fff;
+}
+
+.sidebar-nav {
+  position: absolute;
+  top: 75px;
+  width: 250px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.sidebar-nav > li a {
+  display: block;
+  text-decoration: none;
+  color: #757575;
+  font-weight: 600;
+  font-size: 18px;
+}
 
 </style>
