@@ -7,11 +7,43 @@ import router from './router'
 import BootstrapVue from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
+import axios from './axios'
 
-Vue.use(BootstrapVue)
+Vue.use(BootstrapVue, axios)
 Vue.config.productionTip = false
+axios.defaults.headers.common['Authorization'] = "Bearer" + localStorage.getItem('userToken')
+
+
+// should thos code maybe be structured somewhere els?
+router.beforeEach((to, from, next) => {
+  if(to.matched.some(record => record.meta.requiresAuth)){
+    // eslint-disable-next-line
+    console.log(to.matched.some(record => record.meta.requiresAuth))
+    if (localStorage.getItem('userToken') == null){
+      next({
+        path: '/login',
+        params: {nextUrl: to.fullPath}
+      })
+    }
+    else{
+      next()
+    }
+  }
+  else{
+    if(localStorage.getItem('userToken') != null){
+      next({
+        path: '/admin',
+        param: {nextUrl: '/admin'}
+      })
+    }
+    else{
+      next()
+    }
+  }
+});
 
 new Vue({
   router,
+  axios,
   render: h => h(App),
 }).$mount('#app')

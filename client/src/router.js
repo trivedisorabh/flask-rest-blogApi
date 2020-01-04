@@ -19,12 +19,14 @@ export default new Router({
     {
       path: '/login',
       name: 'Login',
-      component: Login
+      component: Login,
+      meta: { requiresAuth: false}
     },
     {
-      path: '/Admin',
+      path: '/admin',
       name: 'Admin',
-      component: Admin
+      component: Admin,
+      meta: {requiresAuth: true}
     }
   ],
 });

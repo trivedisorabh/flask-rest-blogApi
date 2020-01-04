@@ -7,7 +7,7 @@
           <p class="h4 text-center mb-4"> Logg inn </p>
           <div class="grey-text">
             <!-- mdb need to be installed to use the UI-kit -->
-            <mdb-input label="email" v-model="email" icon="envelope" type="email"/>
+            <mdb-input label="username" v-model="username" icon="user" type="text"/>
             <mdb-input label="password" v-model="password" icon="lock" type="password"/>
           </div>
 
@@ -22,7 +22,8 @@
 
 <script>
   import {mdbInput, mdbBtn} from 'mdbvue';
-  //import axios from 'axios';
+  import axios from 'axios';
+  import router from '../router'
 
   export default {
     name: 'Basic',
@@ -32,19 +33,26 @@
     },
     data() {
       return {
-        email: '',
+        username: '',
         password: '',
       };
 
     },
     methods:{
       onSubmit() {
+        const loginPath = 'http://localhost:5000/login';
         let loginData = {
-          username: this.email,
+          username: this.username,
           password: this.password
         }
-        // eslint-disable-next-line
-        console.log(loginData)
+        axios.post(loginPath, loginData)
+        .then((res) => {
+          localStorage.setItem('userToken',res.data)
+          // eslint-disable-next-line
+          console.log()
+          router.push('/admin')
+        })
+
       }
     }
   }

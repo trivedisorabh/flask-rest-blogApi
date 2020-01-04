@@ -9,6 +9,7 @@ import datetime
 from functools import wraps
 from flask_migrate import Migrate
 from flask_cors import CORS
+import sys
 
 app = Flask(__name__)
 #loading configuration variables from file
@@ -133,23 +134,43 @@ def delete_user(user_id):
 
     return jsonify({'message' : 'the user has been deleted!'})
 
-@app.route('/login')
+@app.route('/login', methods=['POST'])
 def login():
-    auth = request.authorization
+    #auth = request.authorization
+    data = request.get_json()
 
+    username = data['username']
+    password = data['password']
+
+    if not username:
+        return jsonify({'message' : "Missing username"}), 400
+    if not password:
+        return jsonify({'message' : "Missing password"}), 400
+
+    user = session.query(User).filter_by(name=username).first()
+    if check_password_hash(user.password, password):
+        token = jwt.encode({'user_id' : user.id, 'exp' : datetime.datetime.utcnow() + datetime.timedelta(minutes=30)}, app.config['SECRET_KEY'])
+        return jsonify({"token" : token.decode('UTF-8')}), 200
+    else:
+        return jsonify({'message' : "user does not exist..or wrong password"}), 401
+
+    # if somthing else is wrong..
+    return jsonify({'message' : "somthing is wrong.."})
+
+"""
     if not auth or not auth.username or not auth.password:
         return make_response('Could not verify', 401, {'WWW-Authenticate' : 'Basic realm="Login required!"'})
 
-    user = session.query(User).filter_by(name=auth.username).first()
-    #print(user.name)
+    user = session.query(User).filter_by(name=username).first()
+    print(user.name)
     if not user:
         return make_response('Could not verify', 401, {'WWW-Authenticate' : 'Basic realm="Login required!"'})
-
-    if check_password_hash(user.password, auth.password):
+    if check_password_hash(user.password, password):
         token = jwt.encode({'user_id' : user.id, 'exp' : datetime.datetime.utcnow() + datetime.timedelta(minutes=30)}, app.config['SECRET_KEY'])
         return jsonify({"token" : token.decode('UTF-8')})
 
     return make_response('Could not verify', 401, {'WWW-Authenticate' : 'Basic realm="Login required!"'})
+"""
 
 """
 Implementing a logout rout, not finished.
