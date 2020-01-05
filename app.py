@@ -148,11 +148,17 @@ def login():
         return jsonify({'message' : "Missing password"}), 400
 
     user = session.query(User).filter_by(name=username).first()
+
+    # need to check if the user not found.
+    if user == None:
+        return jsonify({'message' : "Wrong username"}), 401
+
     if check_password_hash(user.password, password):
         token = jwt.encode({'user_id' : user.id, 'exp' : datetime.datetime.utcnow() + datetime.timedelta(minutes=30)}, app.config['SECRET_KEY'])
         return jsonify({"token" : token.decode('UTF-8')}), 200
+
     else:
-        return jsonify({'message' : "user does not exist..or wrong password"}), 401
+        return jsonify({'message' : "Wrong password"}), 401
 
     # if somthing else is wrong..
     return jsonify({'message' : "somthing is wrong.."})

@@ -13,6 +13,7 @@
 
           <div class="text-center">
             <mdb-btn type="submit"> Login </mdb-btn>
+            <p> {{msg}}</p>
           </div>
         </form>
       </div>
@@ -35,6 +36,7 @@
       return {
         username: '',
         password: '',
+        msg: '',
       };
 
     },
@@ -49,8 +51,13 @@
         .then((res) => {
           localStorage.setItem('userToken',res.data)
           // eslint-disable-next-line
-          console.log()
+          console.log(status)
           router.push('/admin')
+        })
+        .catch((error) => {
+          this.msg = error.response.data.message
+          // eslint-disable-next-line
+          console.log(error.response);
         })
 
       }
