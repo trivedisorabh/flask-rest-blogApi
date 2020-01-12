@@ -6,6 +6,8 @@
 This blog-api is a learning project for using flask as backend and for making a RESTfull api with JWT authentication.<br>
 It will also serve as a part of my personal webpage<br>
 The project is not finished, so please let me know if you see somthing you like to contribute to. You can also post a issue and look at the todo-list, its most welcome. <br>
+Inside the client folder you can find the frontend side of the project. Its built with Vue.js
+
 __Todos:__<br>
  - review structure of the project
  - Update readme

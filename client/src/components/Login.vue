@@ -13,7 +13,7 @@
 
           <div class="text-center">
             <mdb-btn type="submit"> Login </mdb-btn>
-            <p> {{msg}}</p>
+            <p class="errorHandling" v-if="showError"> {{msg}}</p>
           </div>
         </form>
       </div>
@@ -37,6 +37,7 @@
         username: '',
         password: '',
         msg: '',
+        showError: false,
       };
 
     },
@@ -55,6 +56,7 @@
           router.push('/admin')
         })
         .catch((error) => {
+          this.showError = true
           this.msg = error.response.data.message
           // eslint-disable-next-line
           console.log(error.response);
@@ -66,6 +68,14 @@
 </script>
 
 <style>
+.errorHandling{
+  padding: 10px;
+  border: 1px solid #a94442;
+  border-radius: 5px;
+  margin: 0px auto;
+  background: #f2dede;
 
+
+}
 
 </style>

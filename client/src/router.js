@@ -3,6 +3,7 @@ import Router from 'vue-router';
 import Ping from './components/Ping.vue';
 import Login from './components/Login.vue';
 import Admin from './components/Admin.vue';
+import NewPost from './components/NewPost.vue';
 
 Vue.use(Router);
 
@@ -27,6 +28,11 @@ export default new Router({
       name: 'Admin',
       component: Admin,
       meta: {requiresAuth: true}
+    },
+    {
+      path: '/newpost',
+      name: 'NewPost',
+      component: NewPost,
     }
   ],
 });

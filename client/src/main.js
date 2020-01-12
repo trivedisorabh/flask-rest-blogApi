@@ -8,13 +8,18 @@ import BootstrapVue from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import axios from './axios'
+import VueSimplemde from 'vue-simplemde'
+import 'simplemde/dist/simplemde.min.css'
+
 
 Vue.use(BootstrapVue, axios)
+Vue.component('vue-simplemde', VueSimplemde)
 Vue.config.productionTip = false
 axios.defaults.headers.common['Authorization'] = "Bearer" + localStorage.getItem('userToken')
 
 
 // should thos code maybe be structured somewhere els?
+// beforeEach is checking if the token i valid, and protects the routes.
 router.beforeEach((to, from, next) => {
   if(to.matched.some(record => record.meta.requiresAuth)){
     // eslint-disable-next-line
