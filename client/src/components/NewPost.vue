@@ -7,7 +7,7 @@
   </div>
 
   <div id="markdown-editor">
-    <vue-simplemde ref="markdownEditor" />
+    <vue-simplemde preview-class="markdown-body" ref="markdownEditor" />
   </div>
 
 </div>
@@ -31,5 +31,22 @@ export default {
 </script>
 
 <style>
+
+#markdown-editor {
+  margin-left: 400px;
+  margin-top: 50px;
+  position: absolute;
+  width: 60%;
+}
+
+.markdown-editor {
+
+}
+
+.markdown-body {
+  margin-left: 500px;
+}
+
+@import '~simplemde/dist/simplemde.min.css';
 
 </style>
