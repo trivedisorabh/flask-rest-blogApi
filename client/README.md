@@ -1,24 +1,5 @@
-# client
+# Vue frontend - personal site
 
-## Project setup
-```
-yarn install
-```
-
-### Compiles and hot-reloads for development
-```
-yarn serve
-```
-
-### Compiles and minifies for production
-```
-yarn build
-```
-
-### Lints and fixes files
-```
-yarn lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+## About
+This client is a project for learning VUE.
+It will also serve as frontend for my personal site. 

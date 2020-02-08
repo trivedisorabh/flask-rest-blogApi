@@ -6,6 +6,16 @@
     <sidebar/>
   </div>
 
+  <div id="form-data">
+    <b-form>
+      <b-form-group id="input-gr-1" label="Title">
+          <b-form-input id="input-1" type="text" placeholder="Enter blog title">
+          </b-form-input>
+      </b-form-group>
+    </b-form>
+  </div>
+
+  <!-- editor that produces markdown. be sure to test out a rich editor aswell -->
   <div id="markdown-editor">
     <vue-simplemde preview-class="markdown-body" ref="markdownEditor" />
   </div>
@@ -39,13 +49,17 @@ export default {
   width: 60%;
 }
 
-.markdown-editor {
-
+#form-data {
+  margin-left: 400px;
+  margin-top: 50px;
+  width: 60%
 }
 
-.markdown-body {
-  margin-left: 500px;
+#input-gr-1{
+  padding-top: 20px;
 }
+
+
 
 @import '~simplemde/dist/simplemde.min.css';
 
