@@ -33,6 +33,7 @@ export default new Router({
       path: '/newpost',
       name: 'NewPost',
       component: NewPost,
+      meta: {requiresAuth: true}
     }
   ],
 });

@@ -50,9 +50,13 @@
         }
         axios.post(loginPath, loginData)
         .then((res) => {
-          localStorage.setItem('userToken',res.data)
+          // storing credentials and id in localstorage.
+          localStorage.setItem('userToken',res.data.token)
+          localStorage.setItem('userId', res.data.user_id)
           // eslint-disable-next-line
-          console.log(status)
+          console.log("user id: ", res.data.user_id)
+          // eslint-disable-next-line
+          console.log("login auth: ", status)
           router.push('/admin')
         })
         .catch((error) => {

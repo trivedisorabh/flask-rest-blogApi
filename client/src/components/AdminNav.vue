@@ -12,6 +12,9 @@
           <li>
             <a href="#"><i class="fas fa-blog"></i>Poster</a>
           </li>
+          <li>
+            <router-link to="/NewPost"><i class="fas fa-envelope"></i> Ny post</router-link>
+          </li>
         </ul>
       </aside>
     </div>
@@ -34,6 +37,8 @@
   position: relative;
   margin-top: -50px;
   margin-bottom: 50px;
+  /* Testing this vs "inline block" in new post, and main window handling */
+  display: table;
 
 }
 

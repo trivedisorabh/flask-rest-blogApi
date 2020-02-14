@@ -52,12 +52,13 @@ def token_required(f):
         except:
             return jsonify({"message" : "Token is invalid"}), 401
 
-        return f(current_user, *args, **kwargs)
+        return f(current_user, *args, **kwarg)
     return decorated
 
-# This function is not necessary at this point
+
 @app.route('/user/<user_id>', methods=['GET'])
-@token_required
+# When cheking authorization it seems like this function get multiple arguments.. 
+#@token_required
 def get_one_user(user_id):
 
     user = session.query(User).get(user_id)
@@ -155,7 +156,7 @@ def login():
 
     if check_password_hash(user.password, password):
         token = jwt.encode({'user_id' : user.id, 'exp' : datetime.datetime.utcnow() + datetime.timedelta(minutes=30)}, app.config['SECRET_KEY'])
-        return jsonify({"token" : token.decode('UTF-8')}), 200
+        return jsonify({"token" : token.decode('UTF-8'), "user_id" : user.id}), 200
 
     else:
         return jsonify({'message' : "Wrong password"}), 401
