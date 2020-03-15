@@ -39,6 +39,7 @@
   margin-bottom: 50px;
   /* Testing this vs "inline block" in new post, and main window handling */
   display: table;
+  
 
 }
 

@@ -19,7 +19,7 @@
   <!-- editor that produces markdown. be sure to test out a rich editor aswell -->
   <div id="markdown-editor">
     <vue-simplemde v-model="content"  ref="markdownEditor" />
-    <b-button variant="dark" v-on:click= "onSubmit"> Send </b-button>
+    <b-button variant="dark" v-on:click= "onSubmit"> Publish </b-button>
   </div>
 
 </div>

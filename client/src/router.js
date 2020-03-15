@@ -4,6 +4,7 @@ import Ping from './components/Ping.vue';
 import Login from './components/Login.vue';
 import Admin from './components/Admin.vue';
 import NewPost from './components/NewPost.vue';
+import BlogList from './components/BlogList.vue'
 
 Vue.use(Router);
 
@@ -34,6 +35,11 @@ export default new Router({
       name: 'NewPost',
       component: NewPost,
       meta: {requiresAuth: true}
+    },
+    {
+      path: '/bloglist',
+      name: 'BlogList',
+      component: BlogList
     }
   ],
 });
