@@ -54,6 +54,8 @@ export default {
       let userId = JSON.parse(localStorage.getItem('userId'))
       this.id = userId
 
+      // Prints just for validating and testing. 
+
       // eslint-disable-next-line
       console.log(localStorage.getItem('userToken'))
       // eslint-disable-next-line

@@ -13,23 +13,18 @@
 
   <mdb-tbl btn responsive striped class="table">
     <mdb-tbl-head>
-      <th>Id</th>
-      <th>Title</th>
-      <th>Author<th>
-      <th>Category </th>
-
+      <tr>
+        <th>Id</th>
+        <th>Title</th>
+        <th>Author<th>
+        <th>Category </th>
+      </tr>
     </mdb-tbl-head>
     <mdb-tbl-body>
-      <tr>
-        <th scope="row"> 1</th>
-        <td>
-          <button type="button" class="btn btn-indigo btn-sm m-0"> press </button>
-        </td>
-      </tr>
-      <tr>
-        <th scope="row"> 2</th>
-        <td> blogpost </td>
-
+      <tr v-for="post in dataRes" :key="post.id">
+        <td> {{post.id}}</td>
+        <td> {{post.name}} </td>
+        <td> {{post.author_id}} </td>
       </tr>
 
     </mdb-tbl-body>
@@ -41,6 +36,7 @@
 
 <script>
 import AdminNav from './AdminNav'
+import axios from 'axios';
 import {mdbTbl, mdbTblHead, mdbTblBody} from 'mdbvue';
 
 export default {
@@ -50,11 +46,39 @@ export default {
     mdbTbl,
     mdbTblHead,
     mdbTblBody
+  },
+  data() {
+    return {
+      dataRes: [],
+      msg: ''
+    }
+  },
+  mounted() {
+    const blogpostData = 'http://localhost:5000/blogpost'
+    axios.get(blogpostData)
+    .then(respons => {
+      this.dataRes = respons.data.blogposts
+
+      // eslint-disable-next-line
+      console.log(this.dataRes);
+    })
+    .catch(error => {
+      // eslint-disable-next-line
+      console.log(error)
+    })
+  },
+  methods: {
+
   }
+
 }
 </script>
 
 <style>
+
+td {
+
+}
 #header {
   margin-left: 50%;
 }
@@ -65,7 +89,7 @@ export default {
 }
 
 .table {
-  padding-left: 260px;
+  padding-left: 400px;
 }
 
 
