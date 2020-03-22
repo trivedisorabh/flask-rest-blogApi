@@ -16,15 +16,19 @@
       <tr>
         <th>Id</th>
         <th>Title</th>
-        <th>Author<th>
-        <th>Category </th>
+        <th>Author id</th>
+        <th>Actions</th>
       </tr>
     </mdb-tbl-head>
     <mdb-tbl-body>
-      <tr v-for="post in dataRes" :key="post.id">
+       <tr v-for="post in dataRes" :key="post.id">
+
         <td> {{post.id}}</td>
         <td> {{post.name}} </td>
         <td> {{post.author_id}} </td>
+        <td> <button type="button" class="btn btn-indigo btn-sm m-0">Edit</button> </td>
+        <td> <button type="button" class="btn btn-red btn-sm m-0">Delete</button> </td>
+
       </tr>
 
     </mdb-tbl-body>

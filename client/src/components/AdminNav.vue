@@ -7,10 +7,10 @@
         </div>
         <ul class="sidebar-nav">
           <li class="active">
-            <a href="#"><i class="fa fa-home"></i>Hjem</a>
+            <router-link to="/Admin"><i class="fa fa-home"></i>Hjem</router-link>
           </li>
           <li>
-            <a href="#"><i class="fas fa-blog"></i>Poster</a>
+            <router-link to="/BlogList"><i class="fas fa-blog"></i>Poster</router-link>
           </li>
           <li>
             <router-link to="/NewPost"><i class="fas fa-envelope"></i> Ny post</router-link>
@@ -39,7 +39,7 @@
   margin-bottom: 50px;
   /* Testing this vs "inline block" in new post, and main window handling */
   display: table;
-  
+
 
 }
 
