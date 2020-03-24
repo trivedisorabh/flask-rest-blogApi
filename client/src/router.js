@@ -5,6 +5,7 @@ import Login from './components/Login.vue';
 import Admin from './components/Admin.vue';
 import NewPost from './components/NewPost.vue';
 import BlogList from './components/BlogList.vue'
+import Home from './components/Home.vue'
 
 Vue.use(Router);
 
@@ -40,6 +41,11 @@ export default new Router({
       path: '/bloglist',
       name: 'BlogList',
       component: BlogList
+    },
+    {
+      path: '/home',
+      name: 'Home',
+      component: Home
     }
   ],
 });
